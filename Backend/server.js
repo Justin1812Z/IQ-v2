@@ -45,6 +45,19 @@ app.get("/sets", (req, res, next) => {
     })
     .catch((err) => next(err));
 })
+
+app.get("/flashcards/:id", (req, res, next) => {
+    const url = req.url;
+    const arr = url.split("/");
+    const urlId = arr[arr.length - 1];
+
+    cardModel
+    .find( { setId: urlId })
+    .then((cards) => {
+        res.json({ cards })
+    })
+    .catch((err) => next(err));
+})
   
 
 app.get("/apis", (req, res) => {
