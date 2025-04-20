@@ -1,17 +1,21 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "./Flashcards.css";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 
 function Flashcards() {
   const [cards, setCards] = useState<any[]>([]);
   const [backendData, setBackendData] = useState<any>({});
   const [loading, setLoading] = useState(true);
+  const [title, setTitle] = useState("error loading title");
   const [question, setQuestion] = useState("Loading first question");
   const [answer, setAnswer] = useState("Loading first answer");
   const [flashcardClasses, setFlashcardClasses] = useState("card");
   const [currentIndex, setCurrentIndex] = useState(0);
   const params = useParams();
+
+  const location = useLocation();
+  const set = location.state?.set;
 
   let flashcard = document.getElementById("flashcard");
 
@@ -60,8 +64,10 @@ function Flashcards() {
         setBackendData(response.data.cards);
         setCards(response.data.cards);
         if (response.data.cards.length > 0) {
+          //console.log("set is : " + set);
           setQuestion(response.data.cards[0].question);
           setAnswer(response.data.cards[0].answer);
+          //setTitle(set.name);
         }
       })
       .then(() => {
@@ -88,7 +94,7 @@ function Flashcards() {
       <main>
         <div id="container">
           <label>
-            <h2 id="title">Error Loading Set Name</h2>
+            <h2 id="title">{title}</h2>
             <div>
               <strong>Start on back of card</strong>
             </div>

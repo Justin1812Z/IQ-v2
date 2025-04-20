@@ -8,7 +8,8 @@ import Browse from './components/Browse/Browse.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <Navbar />
-   <App />
+    <App />
+    
+   
   </StrictMode>,
 )

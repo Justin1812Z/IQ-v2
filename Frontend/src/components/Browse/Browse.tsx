@@ -37,8 +37,8 @@ function Browse() {
       </div>
       <div className="browse-container">
         {        
-        backendData.map((set: any) => (
-          <Link to={set._id}>
+        backendData.map((set: any) => (          
+          <Link to={set._id} state={{ set }}>
             <div className="ind-set">
               <h2>{set.name}</h2>
               <p>Course: {set.course}</p>
